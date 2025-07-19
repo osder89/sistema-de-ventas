@@ -72,6 +72,7 @@ model Product {
   name        String
   description String
   quantity    Int
+  price       Float
   sales       SaleProduct[]
 }
 

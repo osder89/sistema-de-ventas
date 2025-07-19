@@ -1,0 +1,16 @@
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+  background-color: #4a148c !important;
+  color: white !important;
+}
+
+.ant-pagination-prev:hover .ant-pagination-item-link,
+.ant-pagination-next:hover .ant-pagination-item-link {
+  background-color: #6a1b9a !important;
+  color: white !important;
+}
+
+.ant-pagination-item-active .ant-pagination-item-link {
+  background-color: #8e24aa !important;
+  color: white !important;
+}

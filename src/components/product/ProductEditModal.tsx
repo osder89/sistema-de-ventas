@@ -1,19 +1,32 @@
 import React from "react";
 import { Modal, Form, Input, InputNumber } from "antd";
+import type { Product } from "~/utils/interfaces";
 
-interface ProductCreateModalProps {
+interface ProductEditModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: { name: string; description: string; price: number; quantity: number }) => void;
+  onSubmit: (data: Product) => void;
+  product: Product | null;
 }
 
-const ProductCreateModal: React.FC<ProductCreateModalProps> = ({ isOpen, onClose, onSubmit }) => {
+const ProductEditModal: React.FC<ProductEditModalProps> = ({ isOpen, onClose, onSubmit, product }) => {
   const [form] = Form.useForm();
+
+  React.useEffect(() => {
+    if (product) {
+      form.setFieldsValue({
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        quantity: product.quantity,
+      });
+    }
+  }, [product, form]);
 
   const handleOk = async () => {
     try {
       const values = await form.validateFields();
-      onSubmit(values);
+      onSubmit({ ...values, id: product?.id });
       form.resetFields();
     } catch (errorInfo) {
       console.log("Failed:", errorInfo);
@@ -22,14 +35,14 @@ const ProductCreateModal: React.FC<ProductCreateModalProps> = ({ isOpen, onClose
 
   return (
     <Modal
-      title="Crear Producto"
+      title="Editar Producto"
       visible={isOpen}
       onCancel={onClose}
       onOk={handleOk}
-      okText="Crear"
+      okText="Guardar Cambios"
       cancelText="Cancelar"
     >
-      <Form form={form} layout="vertical" name="createProductForm">
+      <Form form={form} layout="vertical" name="editProductForm">
         <Form.Item
           label="Nombre"
           name="name"
@@ -66,4 +79,4 @@ const ProductCreateModal: React.FC<ProductCreateModalProps> = ({ isOpen, onClose
   );
 };
 
-export default ProductCreateModal;
+export default ProductEditModal;
