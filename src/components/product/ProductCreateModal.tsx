@@ -23,7 +23,7 @@ const ProductCreateModal: React.FC<ProductCreateModalProps> = ({ isOpen, onClose
   return (
     <Modal
       title="Crear Producto"
-      visible={isOpen}
+      open={isOpen}
       onCancel={onClose}
       onOk={handleOk}
       okText="Crear"
@@ -59,7 +59,7 @@ const ProductCreateModal: React.FC<ProductCreateModalProps> = ({ isOpen, onClose
           name="quantity"
           rules={[{ required: true, message: "Por favor ingrese la cantidad" }]}
         >
-          <InputNumber min={0} step={1} style={{ width: "100%" }} placeholder="Cantidad del producto" />
+          <InputNumber min={1} step={1} style={{ width: "100%" }} placeholder="Cantidad del producto" />
         </Form.Item>
       </Form>
     </Modal>

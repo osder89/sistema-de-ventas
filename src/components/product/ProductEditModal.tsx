@@ -36,7 +36,7 @@ const ProductEditModal: React.FC<ProductEditModalProps> = ({ isOpen, onClose, on
   return (
     <Modal
       title="Editar Producto"
-      visible={isOpen}
+      open={isOpen}
       onCancel={onClose}
       onOk={handleOk}
       okText="Guardar Cambios"
