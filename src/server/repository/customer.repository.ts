@@ -69,3 +69,10 @@ export const getCustomerById = async (id: number) => {
     });
     return { message: "Cliente no encontrado" };
 }
+
+export const getCustomerByCi = async (ci: string) => {
+  return db.customer.findUnique({
+    where: { ci: ci.trim() },
+  }); 
+};
+

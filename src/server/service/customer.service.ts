@@ -81,3 +81,17 @@ export const deleteCustomerService = async ( id: number ) => {
         throw new Error(`Error al eliminar el cliente: ${errorMessage}`);
     }
 }
+
+export const getCustomerByCiService = async (ci: string) => {
+    try {
+        if (!ci) {
+            throw new Error("CI de cliente inválido");
+        }
+
+        const response = await customerRepository.getCustomerByCi(ci);
+        return response;
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : "Error desconocido al obtener el cliente";
+        throw new Error(`Error al obtener el cliente: ${errorMessage}`);
+    }
+}

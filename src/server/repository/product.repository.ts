@@ -58,3 +58,34 @@ export const deleteProduct = async (id: number) => {
   });
   return { message: "Producto eliminado exitosamente" };
 };
+
+export const searchProducts = async (searchTerm: string, page: number, pageSize: number) => {
+  const skip = (page - 1) * pageSize;
+
+  const products = await db.product.findMany({
+    where: {
+      OR: [
+        { name: { contains: searchTerm, mode: "insensitive" } },
+        { description: { contains: searchTerm, mode: "insensitive" } },
+      ],
+    },
+    skip: skip,
+    take: pageSize,
+  });
+
+  const totalCount = await db.product.count({
+    where: {
+      OR: [
+        { name: { contains: searchTerm, mode: "insensitive" } },
+        { description: { contains: searchTerm, mode: "insensitive" } },
+      ],
+    },
+  });
+
+  return {
+    products,
+    totalCount,
+    totalPages: Math.ceil(totalCount / pageSize),
+  };
+};
+

@@ -95,6 +95,7 @@ model Sale {
   date        DateTime    @default(now())
   totalAmount Float
   products    SaleProduct[]
+  dateCreation   DateTime
 }
 
 model SaleProduct {

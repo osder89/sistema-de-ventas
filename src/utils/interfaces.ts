@@ -37,3 +37,14 @@ export interface SaleProduct {
   sale: Sale;
   product: Product;
 }
+
+export interface CarItem {
+  id: number;
+  name: string;
+  description: string;
+  quantity: number;
+  price: number;
+  stock: number;
+}
+
+

@@ -76,3 +76,17 @@ export const deleteProductService = async (id: number) => {
     throw new Error(`Error al eliminar el producto: ${errorMessage}`);
   }
 };
+
+export const searchProductsService = async (searchTerm: string, page: number, pageSize: number) => {
+  try {
+    if (page <= 0 || pageSize <= 0) {
+      throw new Error("La página y el tamaño de página deben ser mayores a 0");
+    }
+
+    const result = await productRepository.searchProducts(searchTerm, page, pageSize);
+    return result;
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    throw new Error(`Error al buscar los productos: ${errorMessage}`);
+  }
+};
