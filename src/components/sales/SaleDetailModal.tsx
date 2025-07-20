@@ -52,7 +52,7 @@ const SaleDetailModal: React.FC<Props> = ({ saleId, open, onClose }) => {
     load();
   }, [open, saleId]);
 
-  const items = data?.items || [];
+  const items = data?.items ?? [];
   const totalItems = items.length;
   const sliceStart = (page - 1) * pageSize;
   const sliceEnd = sliceStart + pageSize;

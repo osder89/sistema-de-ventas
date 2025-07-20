@@ -1,15 +1,14 @@
 import { NextResponse } from "next/server";
 import * as customerService from "~/server/service/customer.service";
 
+type CtxCiPromise = { params: Promise<{ ci: string }> };
 
-export async function GET(_req: Request, { params }: { params: { ci: string } }) {
-  const { ci } = params;
+export async function GET(_req: Request, { params }: CtxCiPromise) {
+  const { ci } = await params;
   const value = ci?.trim();
-
   if (!value) {
     return NextResponse.json({ error: "CI requerido" }, { status: 400 });
   }
-
   try {
     const customer = await customerService.getCustomerByCiService(value);
     return NextResponse.json({ customer }, { status: 200 });

@@ -4,7 +4,7 @@ import * as salesService from "~/server/service/sales.service";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const saleId = parseInt(url.searchParams.get("saleId") || "0");
+  const saleId = parseInt(url.searchParams.get("saleId") ?? "0");
 
   try {
     if (saleId <= 0) {

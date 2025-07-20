@@ -33,7 +33,7 @@ const SaleCreatePage: React.FC = () => {
       if (response.ok) setCustomer(data.customer);
       else {
         setCustomer(null);
-        message.error(data.error || "Cliente no encontrado.");
+        message.error(data.error ?? "Cliente no encontrado.");
       }
     } catch {
       message.error("Error al buscar el cliente.");
@@ -48,7 +48,7 @@ const SaleCreatePage: React.FC = () => {
       const response = await fetch(`/api/product?search=${encodeURIComponent(searchTerm)}`);
       const data = await response.json();
       if (response.ok) setProductList(data.products);
-      else message.error(data.error || "No se encontraron productos.");
+      else message.error(data.error ?? "No se encontraron productos.");
     } catch {
       message.error("Error al buscar productos.");
     } finally {
@@ -146,7 +146,7 @@ const SaleCreatePage: React.FC = () => {
         setCartItems([]);
         setSuccessOpen(true);
       } else {
-        message.error(data.error || "Error al crear la venta.");
+        message.error(data.error ?? "Error al crear la venta.");
       }
     } catch {
       message.error("Error al crear la venta.");
@@ -196,11 +196,11 @@ const SaleCreatePage: React.FC = () => {
                     </div>
                     <div>
                       <Text strong>NIT:</Text>
-                      <div>{customer?.nit || "—"}</div>
+                      <div>{customer?.nit ?? "—"}</div>
                     </div>
                     <div>
                       <Text strong>Teléfono:</Text>
-                      <div>{customer?.phoneNumber || customer?.phone || "—"}</div>
+                      <div>{customer?.phoneNumber ?? customer?.phone ?? "—"}</div>
                     </div>
                   </Space>
                 </div>
